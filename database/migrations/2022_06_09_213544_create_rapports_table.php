@@ -12,21 +12,16 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {   Schema::disableForeignKeyConstraints();
-        Schema::create('pos', function (Blueprint $table) {
+    {
+        Schema::create('rapports', function (Blueprint $table) {
             $table->id();
-            $table->string('num');
-            $table->string('nom');
-            $table->string('adress');
+            $table->date('date');
             $table->string('etat');
-            $table->timestamps();
-            $table->foreignId('rapport_id')
-            ->constrained()
-            ->onUpdate('restrict')
-            ->onDelete('restrict');
-      
-        });
+           
+            
 
+            $table->timestamps();
+        });
     }
 
     /**
@@ -36,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pos');
+        Schema::dropIfExists('rapports');
     }
 };

@@ -7,6 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+
+  public function rapports()
+{
+    return $this->hasMany('App\Models\Rapport');
+}
     use Notifiable;
 
     protected $fillable = [

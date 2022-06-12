@@ -130,7 +130,7 @@
                     </li>
           
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admins.index' ) }}">
+                        <a class="nav-link" href="{{ route('users.index' ) }}">
                             <span class="menu-title">Liste des utilisateurs</span>
                             <i class="mdi mdi-format-list-bulleted menu-icon"></i>
                         </a>

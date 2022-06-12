@@ -146,7 +146,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="Rapport">
+                        <a class="nav-link" href="{{ route('rapports.index' ) }}">
                             <span class="menu-title">Rapport des visites</span>
                             <i class="mdi mdi-format-list-bulleted menu-icon"></i>
                         </a>

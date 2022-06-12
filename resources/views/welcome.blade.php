@@ -18,7 +18,13 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
-   
+            .body {
+  background: url(http://disputebills.com/site/uploads/2015/10/dispute.png) center / contain no-repeat;
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+  width: 200px; /* no height needed ... image will resize automagically */
+}
         </style>
     </head>
     <body class="antialiased">

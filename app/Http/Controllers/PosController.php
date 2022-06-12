@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pos;
+
+use App\Models\Rapports;
 use Illuminate\Http\Request;
 
 
@@ -13,6 +15,7 @@ class PosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         
@@ -125,6 +128,34 @@ class PosController extends Controller
         return back()->with('message', "Pos a bien  été suprimé !"); 
      
       
+    }
+    public function search(Request $request)
+    {
+        $key = trim($request->get('a'));
+
+        $poss = Pos::query()
+            ->where('nom', 'like', "%{$key}%")
+            ->orWhere('adress', 'like', "%{$key}%")
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $rapports = Rapport::all();
+
+     
+
+        $recent_poss = Pos::query()
+            ->where('is_published', true)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        return view('search', [
+            'key' => $key,
+            'poss' => $poss,
+            'rapports' => $rapports,
+        
+            'recent_posts' => $recent_posts
+        ]);
     }
     }
 

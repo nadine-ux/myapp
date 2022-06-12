@@ -1,7 +1,7 @@
-@extends('layouts.Administrateur')
+@extends('layouts.admin')
 @section('content')
     <div class="page-header">
-        <h3 class="page-title"> Liste des utilisateurs </h3>
+        <h3 class="page-title">Liste des rapports  </h3>
     </div>
 
     <!-- container -->
@@ -40,56 +40,51 @@
                                             </form>
                                         </div>
                                         <div class="col-xl-4">
-                                            <a class="nav-link" href="{{ route('admins.create') }}">
+                                            <a class="nav-link" href="#">
                                                 <div class="text-xl-end mt-xl-0 mt-2">
                                                     <button type="button" class="btn btn-danger mb-2 me-2"><i
-                                                            class="mdi mdi-basket me-1"></i> Ajouter user</button>
+                                                            class="mdi mdi-basket me-1"></i> SHow rapport </button>
 
                                                 </div>
                                             </a>
-                                        </div>
+                                        
+                                        <!-- end col-->
+                                    </div>
                                         <!-- end col-->
                                     </div>
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
+                                                <th> ID </th>
+                                                <th> Date </th>
+                                                <th> Etat </th>
+                                               
                                                 
-                                            <th>ID</th>
-                                                <th>Nom</th>
-                                                <th> Email</th>
-                                                <th>Role</th>
-                                        
-                                                <th> Action </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($admins as $admin)
+                                        @foreach($rapports as $rapport)
                                             <tr>
                                                 
-                                                <td> {{ $admin->id }} </td>
+                                                <td> {{ $rapport->id }}   </td>
+                                                <td> {{ $rapport->date }}  </td>
+                                                <td> {{ $rapport->etat }}  </td>
                                                 <td>
-                                                {{ $admin->name }}
-                                                </td>
-                                                <td>{{ $admin->email }}</td>
-                                                <td>{{ $admin->role}}</td>
-                                              
-
-                                                
-                                             
-                                                <td>
-                                                    <a href="{{ route('admins.edit', $admin->id) }}">
+                                                    <a href="{{ route('rapports.show', $rapport->id) }}">
 
                                                         <i class=" mdi mdi-marker"></i>
                                                     </a>
                                                     @csrf
-                        @method('DELETE')
-                                                    <a href="{{ route('admins.destroy', $admin->id) }}">
-
-                                                        <i class="mdi mdi-delete "></i>
-                                                    </a>
-                                                </td>
+</td>
+                                               
+                    
                                             </tr>
+                                           
                                             @endforeach
+
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        @endsection
+                        </div>
+                    @endsection

@@ -6,16 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Pos extends Model
+class Rapport extends Model
 {
-   
-    public function rapport()
-{ 
-    return $this->belongsTo('App\models\Rapport'); 
-}
     use HasFactory;
     protected $fillable = [
-        'num','nom', 'adress','etat',
+        'date','etat', 'description',
     ];
    
+    public function poss() 
+{ 
+    return $this->hasMany('App\models\Pos'); 
+}
 }
