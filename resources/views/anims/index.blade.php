@@ -1,7 +1,7 @@
-@extends('layouts.administrateur')
+@extends('layouts.admin')
 @section('content')
     <div class="page-header">
-        <h3 class="page-title"> Liste des utilisateurs </h3>
+        <h3 class="page-title"> Liste des animateurs </h3>
     </div>
 
     <!-- container -->
@@ -40,13 +40,7 @@
                                             </form>
                                         </div>
                                         <div class="col-xl-4">
-                                            <a class="nav-link" href="{{ route('users.create') }}">
-                                                <div class="text-xl-end mt-xl-0 mt-2">
-                                                    <button type="button" class="btn btn-danger mb-2 me-2"><i
-                                                            class="mdi mdi-basket me-1"></i> Ajouter user</button>
-
-                                                </div>
-                                            </a>
+                                            
                                         </div>
                                         <!-- end col-->
                                     </div>
@@ -57,47 +51,33 @@
                                             <th>ID</th>
                                         
                                                 <th> Nom </th>
-                                                      <th>Role</th>
+                                                <th> Prenom </th>
+                                                      
                                                 <th>email</th>
+                                                <th>Telephone</th>
                                         
-                                                <th>Action</th>
+                                               
                                               
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($users as $user)
+                                        @foreach($anims as $anim)
                                             <tr>
                                                 
-                                                <td> {{ $user->id }} </td>
+                                                <td> {{ $anim->id }} </td>
                                                 
                                                 <td>
-                                                {{ $user->name }}
+                                                {{ $anim->nom }}
                                                 </td>
                                                        
-                                                <td> {{ $user->role }} </td>
-                                                <td>{{ $user->email }}</td>
-                                                
+                                                <td> {{ $anim->prenom}} </td>
+                                                <td>{{ $anim->email }}</td>
+                                                <td>{{ $anim->telephone }}</td>
                                                
 
                                                 
-                                             
-                                                <td>
-                                                    <a href="{{ route('users.edit', $user->id) }}">
-
-                                                        <i class=" mdi mdi-marker"></i>
-                                                    </a>
-                                                    </a>
-                      <!-- Formulaire pour supprimer un Post : "posts.destroy" -->
-					<form method="POST" action="{{ route('users.destroy', $user) }}" >
-						<!-- CSRF token -->
-						@csrf
-						<!-- <input type="hidden" name="_method" value="DELETE"> -->
-						@method("DELETE")
-						<input type="submit" value="Supprimer" >
-					</form>
-                                                        
-                                                        
-                                                    </a>
+                                                      
+                                                
                                                 </td>
                                             </tr>
                                             @endforeach

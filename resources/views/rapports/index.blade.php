@@ -40,13 +40,7 @@
                                             </form>
                                         </div>
                                         <div class="col-xl-4">
-                                            <a class="nav-link" href="#">
-                                                <div class="text-xl-end mt-xl-0 mt-2">
-                                                    <button type="button" class="btn btn-danger mb-2 me-2"><i
-                                                            class="mdi mdi-basket me-1"></i> SHow rapport </button>
-
-                                                </div>
-                                            </a>
+                                            
                                         
                                         <!-- end col-->
                                     </div>
@@ -63,24 +57,24 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($rapports as $rapport)
+                                
                                             <tr>
                                                 
-                                                <td> {{ $rapport->id }}   </td>
-                                                <td> {{ $rapport->date }}  </td>
-                                                <td> {{ $rapport->etat }}  </td>
+                                                <td> 1   </td>
+                                                <td>   12/5/2022</td>
+                                                <td>  actif   </td>
                                                 <td>
-                                                    <a href="{{ route('rapports.show', $rapport->id) }}">
+                                                    <a href="">
 
-                                                        <i class=" mdi mdi-marker"></i>
+                                                    <button type="button" class="btn btn-danger mb-2 me-2"><i
+                                                            class="mdi mdi-basket me-1"></i> </button>
                                                     </a>
                                                     @csrf
 </td>
                                                
                     
                                             </tr>
-                                           
-                                            @endforeach
+                                    
 
                                         </tbody>
                                     </table>

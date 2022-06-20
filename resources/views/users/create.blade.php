@@ -13,7 +13,7 @@
                 {{ session('message') }}
             </div>
         @endif
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('users.store') }}">
             @csrf
 
             <!-- Name -->
@@ -22,7 +22,11 @@
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
+            <div>
+                <x-label for="role" :value="__('Role')" />
 
+                <x-input id="role" class="block mt-1 w-full" type="text" name="role" :value="old('role')" required autofocus />
+            </div>
             <!-- Email Address -->
             <div class="mt-4">
                 <x-label for="email" :value="__('Email')" />

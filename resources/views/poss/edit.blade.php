@@ -1,16 +1,16 @@
 
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit a task') }}
-        </h2>
-    </x-slot>
-    <x-tasks-card>
-        <!-- Erreurs de validation -->
+        @extends('layouts.Admin')
+@section('content')
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Ajouter un utilisateurs </h4>
+                <p class="card-description"> Ajouter un user  </p>
+                   <!-- Erreurs de validation -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
         <!-- Message de réussite -->
         @if (session()->has('message'))
-            <div class="mt-3 mb-4 list-disc list-inside text-sm text-green-600">
+            <div   class="mt-3 mb-4 list-disc list-inside text-sm text-green-600">
                 {{ session('message') }}
             </div>
         @endif
@@ -51,5 +51,4 @@
                 </x-button>
             </div>
         </form>
-    </x-tasks-card>
-</x-app-layout>
+        @endsection

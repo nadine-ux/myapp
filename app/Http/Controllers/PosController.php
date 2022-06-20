@@ -57,7 +57,9 @@ class PosController extends Controller
 
     $pos->save();
     
-    return back()->with('message', "Le Pos a bien ete creer !");
+  //  return back()->with('message', "Le Pos a bien ete creer !");
+  return redirect()->route('poss.index')
+  ->with('success','User deleted successfully');
 
     }
 
@@ -112,7 +114,9 @@ class PosController extends Controller
         $pos->save();
  
         $pos->update();
-        return back()->with('message', "Pos a bien  été modifié !"); 
+      //  return back()->with('message', "Pos a bien  été modifié !"); 
+      return redirect()->route('poss.index')
+      ->with('success','User deleted successfully');
     }
 
     /**
@@ -121,11 +125,13 @@ class PosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pos $pos)
+    public function destroy($id)
     {
-        $pos->delete();
-        
-        return back()->with('message', "Pos a bien  été suprimé !"); 
+        {
+            Pos::find($id)->delete();
+            return redirect()->route('poss.index')
+                            ->with('success','User deleted successfully');
+        }
      
       
     }

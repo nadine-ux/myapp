@@ -1,4 +1,4 @@
-@extends('layouts.administrateur')
+@extends('layouts.admin')
 @section('content')
     <div class="page-header">
         <h3 class="page-title"> Liste des utilisateurs </h3>

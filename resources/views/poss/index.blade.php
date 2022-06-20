@@ -82,13 +82,14 @@
 
                                                         <i class=" mdi mdi-marker"></i>
                                                     </a>
-                                                    @csrf
-                        @method('DELETE')
-                                                    <a href="{{ route('poss.destroy', $pos->id) }}">
-
-                                                        <i class="mdi mdi-delete "></i>
-                                                        
-                                                        
+                                                    <!-- Formulaire pour supprimer un Post : "posts.destroy" -->
+					<form method="POST" action="{{ route('poss.destroy', $pos) }}" >
+						<!-- CSRF token -->
+						@csrf
+						<!-- <input type="hidden" name="_method" value="DELETE"> -->
+						@method("DELETE")
+						<input type="submit" value="Supprimer" >
+					</form>
                                                     </a>
                                                 </td>
                                             </tr>

@@ -129,7 +129,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                        <a class="nav-link" data-bs-toggle="collapse" href="route('statistics', now()->year)"  aria-expanded="false"
                             aria-controls="ui-basic">
                             <span class="menu-title">Statistiques</span>
                             <i class="menu-arrow"></i>
@@ -160,7 +160,7 @@
 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="gererannimtr">
+                        <a class="nav-link" href="{{ route('anims.index' ) }}">
                             <span class="menu-title">Consulter animateurs </span>
 
                             <i class="mdi mdi-medical-bag menu-icon"></i>

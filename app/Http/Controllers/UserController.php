@@ -9,7 +9,7 @@ use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
 use Illuminate\Support\Arr;
-    
+use Illuminate\Validation\Rules;
 class UserController extends Controller
 {
     /**
@@ -30,8 +30,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name','name')->all();
-        return view('users.create',compact('roles'));
+        /*$roles = Role::pluck('name','name')->all();
+        return view('users.create',compact('roles'));*/
+        return view('users.create');
     }
     
     /**
@@ -42,7 +43,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+       /* $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
@@ -56,7 +57,27 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
     
         return redirect()->route('users.index')
-                        ->with('success','User created successfully');
+                        ->with('success','User created successfully');*/ 
+                        $data = $request->validate([
+                            'name' => ['required', 'string', 'max:255'],
+                            'role' => ['required', 'string', 'max:255'],
+                            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                           
+                            
+                        ]);
+                        $user = new User;
+                        $user->name = $request->name;
+                        $user->role = $request->role;
+                        $user->email = $request->email;
+                        $user->password = Hash::make($request->password);
+                        
+                      
+                        $user->save();
+                        
+                    //    return back()->with('message', "l'utilisateur  a bien ete creer !");   
+                    return redirect()->route('users.index')
+                    ->with('success','User deleted successfully');  
     }
     
     /**
@@ -77,13 +98,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($user)
     {
-        $user = User::find($id);
-        $roles = Role::pluck('name','name')->all();
-        $userRole = $user->roles->pluck('name','name')->all();
-    
-        return view('users.edit',compact('user','roles','userRole'));
+       
+        $user = User::find($user); 
+        return view('users.edit', compact('user'));
     }
     
     /**
@@ -95,28 +114,27 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
-            'password' => 'same:confirm-password',
-            'roles' => 'required'
+        $request->validate([
+            'name'=>'required',
+            'role'=>'required',
+            'email'=> 'required',
+            'password' => 'required',
+           
         ]);
-    
-        $input = $request->all();
-        if(!empty($input['password'])){ 
-            $input['password'] = Hash::make($input['password']);
-        }else{
-            $input = Arr::except($input,array('password'));    
-        }
-    
-        $user = User::find($id);
-        $user->update($input);
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
-    
-        $user->assignRole($request->input('roles'));
-    
-        return redirect()->route('users.index')
-                        ->with('success','User updated successfully');
+ 
+ 
+        $user = USER::find($id);
+        $user->name = $request->get('name');
+        $user->role = $request->get('role');
+        $user->email = $request->get('email');
+        $user->password = $request->get('password');
+        
+        $user->save();
+ 
+        $user->update();
+       // return back()->with('message', "l'utilisateur a bien  été modifié !");
+       return redirect()->route('users.index')
+       ->with('success','User deleted successfully');
     }
     
     /**
