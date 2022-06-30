@@ -1,49 +1,33 @@
-
-@extends('layouts.admin')
+@extends('layouts.adminposr')
 @section('content')
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Ajouter un Pos </h4>
-                <p class="card-description"> Ajouter un Pos  </p>
-                   <!-- Erreurs de validation -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-        <!-- Message de réussite -->
-        @if (session()->has('message'))
-            <div   class="mt-3 mb-4 list-disc list-inside text-sm text-green-600">
-                {{ session('message') }}
-            </div>
-        @endif
-        <form action="{{ route('poss.store') }}" method="post">
-@csrf
-            <!-- Titre -->
-            <div>
-                <x-label for="num" :value="__('Num')" />
-                <x-input id="num" class="block mt-1 w-full" type="text" name="num" :value="old('num')" required autofocus />
-</div>
-             <!-- Name-->
-             
-             <div>
-                <x-label for="nom" :value="__('Nom')" />
-                <x-input id="nom" class="block mt-1 w-full" type="text" name="nom" :value="old('nom')" required autofocus />
-</div>
-            <!-- adress -->
-            <div class="mt-4">
-                <x-label for="adress" :value="__('Adress')" />
-                <x-textarea class="block mt-1 w-full" id="adress" name="adress">{{ old('adress') }}</x-textarea>
-            </div>
-                   <!-- etat -->
-                   <div>
-                <x-label for="etat" :value="__('Etat')" />
-                <x-input id="etat" class="block mt-1 w-full" type="text" name="etat" :value="old('etat')" required autofocus />
-</div>
-            <div class="flex items-center justify-end mt-4">
-                <x-button class="ml-3">
-                    {{ __('Send') }}
-                </x-button>
-            </div>
-        </form>
-            </div>
+    <div class="card" style="margin:20px;">
+        <div class="card-header">Ajouter un Pos</div>
+        <div class="card-body">
+
+            <form action="{{ route('poss.store') }}" method="post">
+                {!! csrf_field() !!}
+                <label>Nom_POS</label></br>
+                <input type="text" name="Nom_POS" id="Nom_POS" class="form-control"></br>
+                <label>Address</label></br>
+                <input type="text" name="Adresse" id="Adresse" class="form-control"></br>
+                <label>Statut</label></br>
+                <input type="text" name="Statut" id="Statut" class="form-control"></br>
+
+                <label>telephone</label></br>
+                <input type="text" name="telephone" id="telephone" class="form-control"></br>
+                <div class="field">
+                    <label class="label">nom de annimateur</label>
+                    <div class="select">
+                        <select name="user_id" class="form-select" aria-label="Default select example">
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div></br></br>
+                <input type="submit" value="Enregistrer" class="btn btn-danger"></br>
+            </form>
+
         </div>
     </div>
 @endsection

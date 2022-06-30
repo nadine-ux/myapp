@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="page-header">
-        <h3 class="page-title"> Liste des animateurs </h3>
+        <h3 class="page-title"> Liste des utilisateurs </h3>
     </div>
 
     <!-- container -->
@@ -39,47 +39,42 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="col-xl-4">
-                                            
-                                        </div>
+
                                         <!-- end col-->
                                     </div>
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                
-                                            <th>ID</th>
-                                        
+
+
+
                                                 <th> Nom </th>
-                                                <th> Prenom </th>
-                                                      
+
                                                 <th>email</th>
-                                                <th>Telephone</th>
-                                        
-                                               
-                                              
+                                                <th>telephone</th>
+
+
+
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($anims as $anim)
-                                            <tr>
-                                                
-                                                <td> {{ $anim->id }} </td>
-                                                
-                                                <td>
-                                                {{ $anim->nom }}
-                                                </td>
-                                                       
-                                                <td> {{ $anim->prenom}} </td>
-                                                <td>{{ $anim->email }}</td>
-                                                <td>{{ $anim->telephone }}</td>
-                                               
+                                            @foreach ($users as $user)
+                                                <tr>
 
-                                                
-                                                      
-                                                
-                                                </td>
-                                            </tr>
+
+
+                                                    <td>
+                                                        {{ $user->name }}
+                                                    </td>
+
+
+                                                    <td>{{ $user->email }}</td>
+                                                    <td>{{ $user->numero_tele }}</td>
+
+
+
+
+                                                </tr>
                                             @endforeach
                                 </div>
                             </div>

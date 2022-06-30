@@ -8,14 +8,36 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pos extends Model
 {
-   
-    public function rapport()
-{ 
-    return $this->belongsTo('App\models\Rapport'); 
-}
     use HasFactory;
     protected $fillable = [
-        'num','nom', 'adress','etat',
+    'Nom_POS',
+    'Adresse',
+    'Statut',
+    'telephone',
+    'user_id',
+
+
+
     ];
-   
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function localisation()
+    {
+        return $this->belongsTo(localisation::class);
+    }
+    public function vendeur()
+    {
+        return $this->belongsTo(vendeur::class);
+    }
+    public function problemes()
+    {
+        return $this->hasMany(probleme::class);
+    }
+    public function rapports()
+    {
+        return $this->hasMany(rapport::class);
+    }
 }

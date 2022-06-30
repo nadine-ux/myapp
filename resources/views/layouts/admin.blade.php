@@ -26,9 +26,9 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo" href="index"><img src="assets/images/Logo_Djezzy.png"
+                <a class="navbar-brand brand-logo" href="dashboard"><img src="assets/images/djz.png"
                         alt="logo" /></a>
-                <a class="navbar-brand brand-logo-mini" href="index"><img src="assets/images/logo-mini.svg"
+                <a class="navbar-brand brand-logo-mini" href="dashboard"><img src="assets/images/logo-mini.svg"
                         alt="logo" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -48,31 +48,31 @@
                 </div>
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-profile dropdown">
-                        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="nav-profile-img">
                                 <img src="{{ asset('assets/images/faces/face1.jpg') }}" alt="image">
                                 <span class="availability-status online"></span>
                             </div>
                             <div class="nav-profile-text">
-                                <p class="mb-1 text-black">Superviseur</p>
+                                <p class="mb-1 text-black">{{ Auth::user()->role }}</p>
                             </div>
                         </a>
                         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
                             <a class="dropdown-item" href="#">
                                 <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
-                           
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                    </a>
-                           
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                            </a>
+
                         </div>
                     </li>
                     <li class="nav-item d-none d-lg-block full-screen-link">
@@ -83,11 +83,11 @@
 
                     <li class="nav-item nav-logout d-none d-lg-block">
                         <a class="nav-link" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                             <i class="mdi mdi-power"></i>
                         </a>
                     </li>
@@ -116,21 +116,21 @@
                                 <!--change to offline or busy as needed-->
                             </div>
                             <div class="nav-profile-text d-flex flex-column">
-                                <span class="font-weight-bold mb-2">Superviseur</span>
-                                <span class="text-secondary text-small">Project Manager</span>
+                                <span class="font-weight-bold mb-2">{{ Auth::user()->role }}</span>
+                                <span class="text-secondary text-small">{{ Auth::user()->name }}</span>
                             </div>
                             <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index">
+                        <a class="nav-link" href="dashboard">
                             <span class="menu-title">Dashboard</span>
                             <i class="mdi mdi-home menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="route('statistics', now()->year)"  aria-expanded="false"
-                            aria-controls="ui-basic">
+                        <a class="nav-link" data-bs-toggle="collapse" href="route('statistics', now()->year)"
+                            aria-expanded="false" aria-controls="ui-basic">
                             <span class="menu-title">Statistiques</span>
                             <i class="menu-arrow"></i>
                             <i class="mdi mdi-chart-bar menu-icon"></i>
@@ -146,21 +146,21 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('rapports.index' ) }}">
+                        <a class="nav-link" href="{{ route('rapports.index') }}">
                             <span class="menu-title">Rapport des visites</span>
                             <i class="mdi mdi-format-list-bulleted menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('poss.index' ) }}">
-                            <span class="menu-title">Gestion des Pos  </span>
+                        <a class="nav-link" href="{{ route('poss.index') }}">
+                            <span class="menu-title">Gestion des Pos </span>
 
                             <i class="mdi mdi-medical-bag menu-icon"></i>
                         </a>
 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('anims.index' ) }}">
+                        <a class="nav-link" href="{{ route('anims.index') }}">
                             <span class="menu-title">Consulter animateurs </span>
 
                             <i class="mdi mdi-medical-bag menu-icon"></i>
@@ -169,13 +169,12 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="probelem">
+                        <a class="nav-link" href="problemes">
                             <span class="menu-title">problemes</span>
                             <i class="mdi mdi-format-list-bulleted menu-icon"></i>
                         </a>
                     </li>
 
-                    
 
                 </ul>
             </nav>

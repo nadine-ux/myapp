@@ -3,19 +3,23 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
 
-  public function rapports()
-{
-    return $this->hasMany('App\Models\Rapport');
-}
-    use Notifiable;
+
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'name', 'role','email', 'password',
+        'name',
+        'email',
+        'password',
+        'role',
+        'numero_tele',
+
     ];
 
     protected $hidden = [
@@ -33,13 +37,18 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
-    public function users()
+    public function pos()
     {
-        return $this
-            ->belongsToMany('App\Models\User')
-            ->withTimestamps();
+        return $this->hasMany(pos::class);
     }
-
+    public function rapports()
+    {
+        return $this->hasMany(rapport::class);
+    }
+    public function problemes()
+    {
+        return $this->hasMany(probleme::class);
+    }
     public function authorizeRoles($roles)
     {
       if ($this->hasAnyRole($roles)) {

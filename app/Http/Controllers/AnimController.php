@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Anim;
+use App\Models\user;
 
 class AnimController extends Controller
 {
@@ -14,8 +14,8 @@ class AnimController extends Controller
      */
     public function index()
     {
-        $anims = Anim::all();
-        return view('anims.index', compact('anims'));
+        $users = user::where('role','LIKE','%'.'animateur'.'%')->get();
+        return view('anims.index', compact('users'));
     }
 
     /**
@@ -41,22 +41,22 @@ class AnimController extends Controller
             'prenom' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'telephone' => ['required', 'string', 'max:255'],
-            
-           
-            
+
+
+
         ]);
-        $anim = new Anim;
-        $anim->nom = $request->nom;
-        $anim->prenom = $request->prenom;
-        $anim->email= $request->email;
-        $anim->telephone = $request->telephone;
-        
-      
-        $anim->save();
-        
-    //    return back()->with('message', "l'utilisateur  a bien ete creer !");   
+        $user = new user;
+        $user->nom = $request->nom;
+        $user->prenom = $request->prenom;
+        $user->email= $request->email;
+        $user->telephone = $request->telephone;
+
+
+        $user->save();
+
+    //    return back()->with('message', "l'utilisateur  a bien ete creer !");
     return redirect()->route('anims.index')
-    ->with('success','User deleted successfully');  
+    ->with('success','User deleted successfully');
     }
 
     /**

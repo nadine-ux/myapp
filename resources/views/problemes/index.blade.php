@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="page-header">
-        <h3 class="page-title">Liste des rapports </h3>
+        <h3 class="page-title">Liste des problemes </h3>
     </div>
 
     <!-- container -->
@@ -51,34 +51,32 @@
                                             <tr>
                                                 <th> Non de POS </th>
                                                 <th> Non animateur </th>
-                                                <th> Date_rapport </th>
+                                                <th> Type de probleme </th>
+                                                <th> mettre à jour </th>
                                                 <th> Etat </th>
-                                                <th>Actions</th>
+
 
 
 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($rapports as $rapport)
+                                            @foreach ($problemes as $probleme)
                                                 <tr>
 
 
-                                                    <td>{{ $rapport->pos->Nom_POS }}</td>
-                                                    <td>{{ $rapport->user->name }}</td>
-                                                    <td>{{ $rapport->updated_at }}</td>
+                                                    <td>{{ $probleme->pos->Nom_POS }}</td>
+                                                    <td>{{ $probleme->user->name }}</td>
+                                                    <td>{{ $probleme->type }}</td>
+                                                    <td>{{ $probleme->updated_at }}</td>
                                                     <td>
-                                                        @if ($rapport->Etat)
-                                                            <span class="badge badge-success">active</span>
+                                                        @if ($probleme->Etat)
+                                                            <span class="badge badge-success">Régler</span>
                                                         @else
-                                                            <span class="badge badge-danger">inactive</span>
+                                                            <span class="badge badge-danger">Encore</span>
                                                         @endif
                                                     </td>
-                                                    <td><a href="{{ route('rapports.show', $rapport->id) }}">
-                                                            <button class="btn btn-info btn-sm">
-                                                                <i class="fa fa-eye" aria-hidden="true"></i>
-                                                                consulter</button>
-                                                        </a></td>
+
 
 
 

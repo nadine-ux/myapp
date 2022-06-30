@@ -5,9 +5,11 @@ use App\Http\Controllers\PosController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\RapportController;
+use App\Http\Controllers\problemeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Back\StatisticsController;
 use App\Http\Controllers\AnimController;
+use App\Http\Controllers\dashboardcontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,26 +26,24 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [dashboardcontroller::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
 Route::get('/admin', 'AdminController@index');
 Route::get('/superadmin', 'SuperAdminController@index');
 
- 
+
 Route::resource('poss', PosController::class)->middleware('auth');
 
 
- 
+
 Route::resource('anims', AnimController::class)->middleware('auth');
- 
 
 
 
- 
+
+Route::resource('problemes', problemeController::class)->middleware('auth');
 Route::resource('rapports', RapportController::class)->middleware('auth');
 Route::get('/search', [PosController::class, 'search']);
 

@@ -13,12 +13,26 @@ return new class extends Migration
      */
     public function up()
     {
+
         Schema::create('rapports', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->string('etat');
-           
-            
+            $table->boolean('Etat');
+            $table->date('Date_rapport');
+            $table->text('description');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+            /*$table->unsignedBigInteger('pos_id')->nullable();
+            $table->foreign('pdv_id')->references('id')->on('pdvs');*/
+
+            $table->foreignId('pos_id')->nullable()
+            ->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+            /*$table->foreignId('user_id')->nullable()
+            ->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');*/
+
 
             $table->timestamps();
         });

@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Rapport;
-
+use App\Models\probleme;
 use Illuminate\Http\Request;
 
-class RapportController extends Controller
+class problemecontroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +13,11 @@ class RapportController extends Controller
      */
     public function index()
     {
-        //$rapports = Rapport::all();
-        $rapports = Rapport::orderBy('updated_at','desc')->get();
-        return view('rapports.index', compact('rapports'));
+        $problemes = probleme::orderBy('updated_at','desc')->get();
+        return view('problemes.index', compact('problemes'));
+
+
+
     }
 
     /**
@@ -46,9 +47,9 @@ class RapportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Rapport $rapport)
+    public function show($probleme)
     {
-        return view('rapports.show', compact('rapport'));
+        return view('problemes.show', compact('probleme'));//
     }
 
     /**

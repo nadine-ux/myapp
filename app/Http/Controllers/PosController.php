@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pos;
-
+use App\Models\user;
 use App\Models\Rapports;
 use Illuminate\Http\Request;
 
@@ -15,10 +15,10 @@ class PosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function index()
     {
-        
+
     $poss = Pos::all();
     return view('poss.index', compact('poss'));
     }
@@ -30,8 +30,8 @@ class PosController extends Controller
      */
     public function create()
     {
-        
-    return view('poss.create');
+        $users = user::all();
+    return view('poss.create', compact('users'));
     }
 
     /**
@@ -42,25 +42,27 @@ class PosController extends Controller
      */
     public function store(Request $request)
     {
-        
-    $data = $request->validate([
-        'num' => 'required|max:10',
-        'nom' => 'required|max:100',
-        'adress' => 'required|max:500',
-        'etat' => 'required|max:100',
+
+    /*$data = $request->validate([
+        'Nom_POS' => 'required|max:10',
+        'Adresse' => 'required|max:100',
+        'Statut' => 'required|max:500',
+        'telephone' => 'required|max:100',
     ]);
     $pos = new Pos;
-    $pos->num = $request->num;
-    $pos->nom = $request->nom;
-    $pos->adress = $request->adress;
-    $pos->etat = $request->etat;
+    $pos->Nom_POS = $request->Nom_POS;
+    $pos->Adresse = $request->Adresse;
+    $pos->Statut = $request->Statut;
+    $pos->telephone = $request->telephone;
 
     $pos->save();
-    
+
   //  return back()->with('message', "Le Pos a bien ete creer !");
   return redirect()->route('poss.index')
-  ->with('success','User deleted successfully');
-
+  ->with('success','pos Has Been created successfully');*/
+  $input = $request->all();
+  pos::create($input);
+  return redirect('poss')->with('flash_message', 'pos Has Been created successfully');
     }
 
     /**
@@ -81,9 +83,9 @@ class PosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit( $pos)
-     
+
     {
-        $pos = Pos::find($pos); 
+        $pos = Pos::find($pos);
         return view('poss.edit', compact('pos'));
     }
 
@@ -97,26 +99,26 @@ class PosController extends Controller
     public function update(Request $request,$id)
     {
         //
- 
+
         $request->validate([
-            'num'=>'required',
-            'nom'=> 'required',
-            'adress' => 'required',
-            'etat' => 'required',
+            'Nom_POS'=>'required',
+            'Adresse'=> 'required',
+            'Statut' => 'required',
+            'telephone' => 'required',
         ]);
- 
- 
+
+
         $pos = POS::find($id);
-        $pos->num = $request->get('num');
-        $pos->nom = $request->get('nom');
-        $pos->adress = $request->get('adress');
-        $pos->etat = $request->get('etat');
+        $pos->Nom_POS = $request->get('Nom_POS');
+        $pos->Adresse = $request->get('Adresse');
+        $pos->Statut = $request->get('Statut');
+        $pos->telephone = $request->get('telephone');
         $pos->save();
- 
+
         $pos->update();
-      //  return back()->with('message', "Pos a bien  été modifié !"); 
+      //  return back()->with('message', "Pos a bien  été modifié !");
       return redirect()->route('poss.index')
-      ->with('success','User deleted successfully');
+      ->with('success','pos Has Been updated successfully');
     }
 
     /**
@@ -130,24 +132,24 @@ class PosController extends Controller
         {
             Pos::find($id)->delete();
             return redirect()->route('poss.index')
-                            ->with('success','User deleted successfully');
+                            ->with('success','pos deleted successfully');
         }
-     
-      
+
+
     }
     public function search(Request $request)
     {
         $key = trim($request->get('a'));
 
         $poss = Pos::query()
-            ->where('nom', 'like', "%{$key}%")
-            ->orWhere('adress', 'like', "%{$key}%")
+            ->where('Nom_POS', 'like', "%{$key}%")
+            ->orWhere('Adresse', 'like', "%{$key}%")
             ->orderBy('created_at', 'desc')
             ->get();
 
         $rapports = Rapport::all();
 
-     
+
 
         $recent_poss = Pos::query()
             ->where('is_published', true)
@@ -159,9 +161,8 @@ class PosController extends Controller
             'key' => $key,
             'poss' => $poss,
             'rapports' => $rapports,
-        
+
             'recent_posts' => $recent_posts
         ]);
     }
     }
-

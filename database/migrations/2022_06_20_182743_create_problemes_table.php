@@ -12,24 +12,21 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {   Schema::disableForeignKeyConstraints();
-        Schema::create('pos', function (Blueprint $table) {
+    {
+        Schema::create('problemes', function (Blueprint $table) {
             $table->id();
-            $table->string('Nom_POS');
-            $table->string('Adresse');
-            $table->string('Statut');
-            $table->bigInteger('telephone');
+            $table->string('type');
+            $table->boolean('Etat');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            /*$table->unsignedBigInteger('vendeur_id');
-            $table->foreign('vendeur_id')->references('id')->on('vendeurs');
-            $table->unsignedBigInteger('localisation_id');
-
-            $table->foreign('localisation_id')->references('id')->on('localisations');*/
+            /*$table->unsignedBigInteger('pdv_id')->nullable();
+            $table->foreign('pdv_id')->references('id')->on('pdvs');*/
+            $table->foreignId('pos_id')->nullable()
+            ->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
-
         });
-
     }
 
     /**
@@ -39,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pos');
+        Schema::dropIfExists('problemes');
     }
 };

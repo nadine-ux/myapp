@@ -53,46 +53,57 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                
-                                            <th>ID</th>
-                                                <th>Num</th>
-                                                <th> Nom de POS</th>
-                                                <th>Address</th>
-                                        
+
+
+                                                <th>Nom de POS</th>
+                                                <th> Address</th>
+                                                <th> nom de animateur </th>
+                                                <th>telephone</th>
                                                 <th>Etat</th>
                                                 <th> Action </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($poss as $pos)
-                                            <tr>
-                                                
-                                                <td> {{ $pos->id }} </td>
-                                                <td>
-                                                {{ $pos->num }}
-                                                </td>
-                                                <td>{{ $pos->nom }}</td>
-                                                <td>{{ $pos->adress}}</td>
-                                                <td>{{ $pos->etat}}</td>
+                                            @foreach ($poss as $pos)
+                                                <tr>
 
-                                                
-                                             
-                                                <td>
-                                                    <a href="{{ route('poss.edit', $pos->id) }}">
 
-                                                        <i class=" mdi mdi-marker"></i>
-                                                    </a>
-                                                    <!-- Formulaire pour supprimer un Post : "posts.destroy" -->
-					<form method="POST" action="{{ route('poss.destroy', $pos) }}" >
-						<!-- CSRF token -->
-						@csrf
-						<!-- <input type="hidden" name="_method" value="DELETE"> -->
-						@method("DELETE")
-						<input type="submit" value="Supprimer" >
-					</form>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                                    <td>
+                                                        {{ $pos->Nom_POS }}
+                                                    </td>
+                                                    <td>{{ $pos->Adresse }}</td>
+                                                    <td>{{ $pos->user->name }}</td>
+                                                    <td>0{{ $pos->telephone }}</td>
+
+
+                                                    @if ($pos->Statut == 'active')
+                                                        <td><span class="badge badge-success">{{ $pos->Statut }}</span>
+                                                        </td>
+                                                    @else
+                                                        <td> <span class="badge badge-danger">{{ $pos->Statut }}</span>
+                                                        </td>
+                                                    @endif
+
+                                                    <td>
+                                                        <a href="{{ route('poss.edit', $pos->id) }}">
+
+                                                            <button class="btn btn-info btn-sm"><i class="fa fa-eye"
+                                                                    aria-hidden="true"></i>
+                                                                Modifier</button>
+                                                        </a>
+                                                        <form method="POST"
+                                                            action="{{ route('poss.destroy', $pos) }}"accept-charset="UTF-8"
+                                                            style="display:inline">
+                                                            {{ method_field('DELETE') }}
+                                                            {{ csrf_field() }}
+                                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                                title="Delete Student" onclick="return confirm("Confirm
+                                                                delete?")"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                                Supprimer</button>
+                                                        </form>
+
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                 </div>
                             </div>
